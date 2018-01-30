@@ -27,10 +27,10 @@ class App extends React.Component {
         console.table(this.state);
         console.log('vlad');
 
-        this.triggerSearch(this.state.searchTerm);
+        this.videoSearch(this.state.searchTerm);
     }
 
-    triggerSearch(term) {
+    videoSearch(term) {
         YTSearch({key: API_KEY, term: term}, (videos) => {
                 console.log(videos);
                 this.setState({
@@ -42,9 +42,16 @@ class App extends React.Component {
     }
 
     render() {
+        // This lodash thing is really cool - returns debounced version of this function
+        // (NOOP if called more often than 300 ms)
+        const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300);
+
         return (
             <div>
-                <SearchBar onEnter={searchTerm => this.triggerSearch(searchTerm)}/>
+                <SearchBar
+                    onSearchTermChange={videoSearch}
+                    searchTerm={this.state.searchTerm}
+                />
                 <VideoDetail video={this.state.selectedVideo}/>
                 <VideoList
                     videos={this.state.videos}

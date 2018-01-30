@@ -1,35 +1,34 @@
 import React, { Component } from 'react';
-import YTSearch from 'youtube-api-search';
+import _ from 'lodash';
 
 
 class SearchBar extends Component {
+    /**
+     * props has keys searchTerm and onSearchTermChange
+    */
     constructor(props){
         super(props);
-
-        this.state = {'a': 0, onEnter: props.onEnter};
-
-
+        this.state = {searchTerm: props.searchTerm};
     }
+
     render() {
         return (
-            <div>
-                asdf
+            <div className="search-bar">
                 {/* Wow, so this works with arrow functions, but methods require extra work*/}
                 {/*<input onChange={event => this.setState({a: event.target.value})}/>*/}
                 {/*Wow, this requires binding!!!*/}
                 <input
-                    value={this.state.a}
+                    value={this.state.searchTerm}
                     onChange={this.onInputChanged.bind(this)}
-                    onKeyPress={this.onKeyPress.bind(this)}
                 />
-                <br/>
-                The input changed # {this.state.a} times
             </div>
         );
     }
 
     onInputChanged(event){
-        this.setState({'a': event.target.value})
+        this.setState({searchTerm: event.target.value});
+        this.props.onSearchTermChange(event.target.value);
+
     }
 
     onKeyPress(event){
