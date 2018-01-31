@@ -23,3 +23,8 @@ Click [here](https://github.com/StephenGrider/ReactStarter/releases) then downlo
 > npm install
 > npm start
 ```
+
+# Vlad's remarks
+So reducers are functions which return a piece of the state
+Something like models are objects which represent a piece of the DB
+Finished lecture 44
