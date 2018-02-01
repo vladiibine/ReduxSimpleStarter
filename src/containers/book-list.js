@@ -1,10 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {bindActionCreators} from 'redux';
+
+import { selectBook } from "../actions";
+
 
 class BookList extends Component {
     renderList() {
+        console.log("BookList props: ", this.props);
+        // this.props.selectBook('asdf');
+        // console.log('props.selectBook === selectBook', this.props.selectBook == selectBook);
+        // console.log(this.props.selectBook);
+        // console.log(selectBook);
         return this.props.books.map(book => (
-                <li key={book.title} className="list-group-item">{book.title}</li>
+                <li key={book.title} className="list-group-item"
+                    onClick={() => this.props.selectBook(book)}
+                >{book.title}</li>
             )
         )
     }
@@ -26,4 +37,17 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(BookList);
+
+// anything returned from this function, will end up as props on
+// the BookList container
+function mapDispatchToProps(dispatch){
+    //whenever selectBook is called, the result should be passed
+    // to all of our reducers. That's what dispatch does, and
+    // somehow that's what bindActionCreators does
+    // (probably a filter on the key?)
+    return bindActionCreators({selectBook: selectBook}, dispatch)
+}
+
+// Promote BookList from a component to a container - it needs to know
+// about this new dispatch method, selectBook. Make it available as a prop
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);
