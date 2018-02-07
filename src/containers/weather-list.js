@@ -2,14 +2,17 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'react';
 import {connect} from 'react-redux';
 import WeatherPlot from "../components/weather-plot";
+import GoogleMap from "../components/google-map";
 
 class WeatherList extends Component {
     renderWeather(cityData){
         const cityName = cityData.city.name;
+        const {lat, lon} = cityData.city.coord;
+
 
         return (
             <tr key={cityName}>
-                <td>{cityName}</td>
+                <td><GoogleMap lat={lat} lon={lon}/> </td>
                 <td>
                     <WeatherPlot data={cityData.list.map(elem=>elem.main.temp)} color="green" units="k"/>
                 </td>
