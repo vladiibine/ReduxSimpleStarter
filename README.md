@@ -29,3 +29,9 @@ openweathermap.org api key: ec60443bc5f9e8d1af8a9d0834ee8b46
 http://api.openweathermap.org/data/2.5/forecast?q=London,us&appid=ec60443bc5f9e8d1af8a9d0834ee8b46
 
 react-sparklines AVOID 1.7!!
+redux-promisem with its middleware
+    With the help of its middleware 
+        `import ReduxPromise from 'redux-promise';`
+     and then 
+        `const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);` 
+    it stops actions who receive promises in the payload, and RESENDS the actions with the fulfilled promise".. pretty nice
