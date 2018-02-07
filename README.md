@@ -24,7 +24,7 @@ Click [here](https://github.com/StephenGrider/ReactStarter/releases) then downlo
 > npm start
 ```
 
-Finished lecture 66
+Finished lecture 115
 openweathermap.org api key: ec60443bc5f9e8d1af8a9d0834ee8b46
 http://api.openweathermap.org/data/2.5/forecast?q=London,us&appid=ec60443bc5f9e8d1af8a9d0834ee8b46
 
