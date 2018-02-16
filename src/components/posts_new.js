@@ -6,22 +6,41 @@ import {Field, reduxForm} from 'redux-form';
 class PostsNew extends Component {
     renderField(field){
         debugger
+        const {input, meta: {touched, error, valid}} = field;
+
+        // this also would have worked
+        // <div className={hasDanger} with the hasDanger const being built here
+        const hasDanger = `form-group ${touched && !valid ?  "has-danger" : ""}`;
+
+
         return (
-            <div className="form-group">
+            <div className={`form-group ${touched && !valid ?  "has-danger" : ""}`}>
                 <label>{field.vwhLabel}</label>
                 <input
                     className="form-control"
                     type="text"
-                    {...field.input}
+                    {...input}
                 />
-                {field.meta.error}
+                <div className={"text-help"}>
+                    {touched ? error : ""}
+                </div>
             </div>
         )
     }
 
+    onSubmit(values){
+        console.log("Inside onSubmit. The values follow:");
+        console.log(values)
+
+    }
+
     render(){
+        // this handleSubmit is a special prop that we get, for basically having a callback to invoke the validation
+        // function. Oh, first thing, it runs the validation, AND ONLY AFTER everything is fine, if invokes our callback
+        const {handleSubmit} = this.props;
+
         return (
-            <form onSubmit={}>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field vwhLabel="Title" name="title" component={this.renderField} />
 
                 <Field
@@ -45,8 +64,8 @@ class PostsNew extends Component {
 
 
 function validate(values){
-    debugger;
-    console.log("Inside validate post_new.js. Values:" + values);
+    console.log("Inside validate in post_new.js. Values follow:");
+    console.log(values);
     const errors = {};
 
     // validate

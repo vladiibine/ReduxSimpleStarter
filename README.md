@@ -29,4 +29,4 @@ sidenote - the algorithm for finding the mean from 2 given arrays, in O(log(m+n)
 mean, or you know that you have to search the other array (because index(n) is too small, and idx(n+1) is too big)...
 but then the entire other array could be fitted inside i(n) and i(n+1)... is that still a O(log(m+n))??
 
-Finished lecture 137
+Finished lecture 140
