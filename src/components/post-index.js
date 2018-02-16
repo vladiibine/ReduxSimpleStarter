@@ -3,24 +3,16 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 
 import {fetchPosts} from '../actions';
+import {Link} from "react-router-dom";
 
 class PostIndex extends React.Component {
     constructor(props){
         super(props);
 
-        this.createPosts = this.createPosts.bind(this);
         console.log(props.posts);
     }
 
-    createPosts(){
-        return <div>Asdf</div>;
-        return _.entries(this.props.posts).map((entry)=>{
-            return (<div>{entry[0]}: {entry[1].title}</div>)
-        })
-    }
-
     renderPosts(){
-        debugger
         return _.map(this.props.posts, post => {
             return (
                 <li className="list-group-item" key={post.id}>
@@ -33,6 +25,11 @@ class PostIndex extends React.Component {
     render() {
         return (
             <div>
+                <div className="text-xs-right">
+                    <Link className="btn btn-primary" to="/posts/new">
+                        Add a post
+                    </Link>
+                </div>
                 <h3>Posts</h3>
                 <ul className="list-group">
                     {this.renderPosts()}

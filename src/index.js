@@ -3,22 +3,30 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 
-import {BrowserRouter, Route, DefaultRoute} from 'react-router-dom';
+// the Switch renders only the FIRST matched Route... ok...
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import ResolvePromise from 'redux-promise';
 
 import reducers from './reducers';
 import PostIndex from "./components/post-index";
+import PostsNew from "./components/posts_new";
 
 
 const createStoreWithMiddleware = applyMiddleware(ResolvePromise)(createStore);
 
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <BrowserRouter>
-        <div>
-            <Route path="/" component={PostIndex}/>
-        </div>
-    </BrowserRouter>
-  </Provider>
-  , document.querySelector('.container'));
+    <Provider store={createStoreWithMiddleware(reducers)}>
+        <BrowserRouter>
+            <div>
+                {/* This solution works... Dunno if it's the best, but surely works */}
+                {/*<Route exact={true} path="/" component={PostIndex}/>*/}
+                <Switch>
+                    <Route path="/posts/new" component={PostsNew}/>
+                    <Route path="/" component={PostIndex}/>
+                </Switch>
+            </div>
+        </BrowserRouter>
+    </Provider>
+    , document.querySelector('.container'));

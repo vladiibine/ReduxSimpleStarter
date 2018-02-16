@@ -24,4 +24,9 @@ Click [here](https://github.com/StephenGrider/ReactStarter/releases) then downlo
 > npm start
 ```
 
-Finished lecture 128
+sidenote - the algorithm for finding the mean from 2 given arrays, in O(log(m+n)) 
+- I thought about about a solution where you could just binary search one of the arrays, until you get to either the 
+mean, or you know that you have to search the other array (because index(n) is too small, and idx(n+1) is too big)...
+but then the entire other array could be fitted inside i(n) and i(n+1)... is that still a O(log(m+n))??
+
+Finished lecture 137
