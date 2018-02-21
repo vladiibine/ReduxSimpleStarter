@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 
 import {Field, reduxForm} from 'redux-form';
+import {Link} from "react-router-dom";
+import{connect} from 'react-redux';
+import {createPost} from "../actions";
 
 
 class PostsNew extends Component {
     renderField(field){
-        debugger
         const {input, meta: {touched, error, valid}} = field;
 
         // this also would have worked
@@ -30,7 +32,11 @@ class PostsNew extends Component {
 
     onSubmit(values){
         console.log("Inside onSubmit. The values follow:");
-        console.log(values)
+        console.log(values);
+        // .push('/', () => {
+        this.props.createPost(values, () => {
+            this.props.history.push('/');
+        });
 
     }
 
@@ -56,6 +62,8 @@ class PostsNew extends Component {
                 />
 
                 <button type={"submit"} className={"btn btn-primary"}>Submit</button>
+                {/*<button type={"submit"} className={"btn btn-primary"}>Cancel</button>*/}
+                <Link to={"/"} className={"btn btn-danger"} >Cancel </Link>
 
             </form>
         )
@@ -84,7 +92,13 @@ function validate(values){
 }
 
 
+// reduxForm takes our comtainer, and returns something similar, that validates before rendering
 export default reduxForm({
     validate,
     form: 'PostsNewForm'
-})(PostsNew);
+})(
+
+
+    // connect takes our component and makes it a redux-container
+    connect(null, {createPost})(PostsNew)
+);

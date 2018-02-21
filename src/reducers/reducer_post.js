@@ -22,7 +22,6 @@ export default function postReducer(state = {}, action){
 
     switch (action.type){
         case FETCH_POSTS:
-            debugger;
             return _.mapKeys(action.payload.data, "id");
 
 
