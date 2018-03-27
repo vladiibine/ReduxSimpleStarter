@@ -1,10 +1,12 @@
 import axios from 'axios';
 
 export const FETCH_POSTS = 'fetch_posts';
+export const CREATE_POST = 'create_post';
+export const FETCH_POST = 'fetch_post';
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 const API_KEY = '?key=Thanks_for_creating_the_course_its_rly_fun';
-const CREATE_POST = 'create_post';
+
 
 export function fetchPosts(){
     const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
@@ -30,5 +32,13 @@ export function createPost(values, callback){
         // this is totally unexpected behavior actually...
         // does redux-promise just take the first resolved result or something?
         payload: req2,
+    }
+}
+
+export function fetchPost(id){
+    const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`)
+    return {
+        type: FETCH_POST,
+        payload: request
     }
 }

@@ -30,4 +30,4 @@ mean, or you know that you have to search the other array (because index(n) is t
 but then the entire other array could be fitted inside i(n) and i(n+1)... is that still a O(log(m+n))??
 
 for lecture 143, i created: https://github.com/StephenGrider/ReduxSimpleStarter/issues/204
-Finished lecture 143
+Finished lecture 146
